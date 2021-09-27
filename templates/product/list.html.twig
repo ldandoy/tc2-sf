@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Test !{% endblock %}
+
+{% block body %}
+    <div class="d-flex justify-content-between align-items-center">
+        <h1>Liste des produits</h1>
+        <div>
+            <a href="{{ path('products_new') }}" class="btn btn-sm btn-success"><i class="far fa-plus"></i> Ajouter un produit</a>
+        </div>
+    </div>
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prix</th>
+                <th width="15%">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+                <tr>
+                    <td>
+                        {{ product.name }}
+                    </td>
+                    <td>
+                        {{ product.price }}&euro;
+                    </td>
+                    <td>
+                        <a href="{{ path('products_show', { productId: product.id }) }}" class="btn btn-sm btn-dark">
+                            <i class="far fa-eye"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

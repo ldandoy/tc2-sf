@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Test !{% endblock %}
+
+{% block body %}
+    <h1>{{ product.name }}</h1>
+
+    <div>
+        <b>Category</b>: {{ product.CategoryProduct.name }}
+    </div>
+
+    <div>
+        <a href="{{ path('products_list') }}">Retour</a>
+    </div>
+
+{% endblock %}

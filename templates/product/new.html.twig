@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block title %}Nouveau produit{% endblock %}
+
+{% block body %}
+    <h1>Nouveau produit</h1>
+
+    {{ form(form) }}
+
+    <div>
+        <a href="{{ path('products_list') }}">Retour</a>
+    </div>
+
+{% endblock %}
