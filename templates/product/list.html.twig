@@ -1,39 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Test !{% endblock %}
+{% block title %}Nos produits{% endblock %}
 
 {% block body %}
-    <div class="d-flex justify-content-between align-items-center">
-        <h1>Liste des produits</h1>
-        <div>
-            <a href="{{ path('products_new') }}" class="btn btn-sm btn-success"><i class="far fa-plus"></i> Ajouter un produit</a>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col">
+                <div class="title">
+                    <h1>Nos produits</h1>
+                </div>
+        </div>
+
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for product in products %}    
+                <div class="col">
+                    <div class="card">
+                        <img 
+                            src="{{ vich_uploader_asset(product) }}"
+                            class="card-img-top"
+                            alt="{{ product.name }}"
+                        />
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <p class="card-text">Prix: {{ product.price }}&euro;</p>
+                        </div>
+                        <div class="card-footer text-end">
+                            <a href="{{ path('products_show', {productId: product.id})}}" class="btn btn-success">Voir le produit &raquo;</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
     </div>
-    <table class="table table-hover table-striped">
-        <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Prix</th>
-                <th width="15%">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for product in products %}
-                <tr>
-                    <td>
-                        {{ product.name }}
-                    </td>
-                    <td>
-                        {{ product.price }}&euro;
-                    </td>
-                    <td>
-                        <a href="{{ path('products_show', { productId: product.id }) }}" class="btn btn-sm btn-dark">
-                            <i class="far fa-eye"></i>
-                        </a>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
 {% endblock %}

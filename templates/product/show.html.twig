@@ -1,16 +1,51 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Test !{% endblock %}
+{% block title %}{{ product.name }}{% endblock %}
 
 {% block body %}
-    <h1>{{ product.name }}</h1>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col">
+                <img 
+                    class="bd-placeholder-img bd-placeholder-img-lg img-fluid mx-auto" 
+                    width="500"
+                    height="500" 
+                    src="{{ vich_uploader_asset(product) }}"
+                    alt="slide-{{ product.name }}"
+                />
+            </div>
+            <div class="col">
+                <div class="title">
+                    <h1>{{ product.name }}</h1>
+                </div>
+                <div class="cat">
+                    {{ product.categoryProduct.name }}
+                </div>
+                <div class="price">
+                    {{ product.price }}&euro;
+                </div>
+                <div class="description">
+                    {{ product.description }}
+                </div>
+                <div class="addpanier">
+                    <form class="row align-items-center" action="" method="post">
+                        <div class="col-1">
+                            <button type="button" class="btn btn-light">-</button>
+                        </div>
+                        <div class="col-1">
+                            <input type="text" class="form-control" id="" value="1" />
+                        </div>
+                        <div class="col-1">
+                            <button type="button" class="btn btn-light">+</button>
+                        </div>
+                        <div class="col-5">
+                            <button type="button" class="btn btn-success">Ajouter au panier</button>
+                        </div>
+                    </fom>
+                </div>
+            </div>
+        </div>
 
-    <div>
-        <b>Category</b>: {{ product.CategoryProduct.name }}
+
     </div>
-
-    <div>
-        <a href="{{ path('products_list') }}">Retour</a>
-    </div>
-
 {% endblock %}

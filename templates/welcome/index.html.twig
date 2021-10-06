@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+      {% for key, product in products %}
+        <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="{{key}}" class="active" aria-current="true" aria-label="Slide {{key}}"></button>
+      {% endfor %}
+      </div>
+      <div class="carousel-inner">
+      
+        {% for key, product in products %}
+          <div class="carousel-item {% if key == 0 %}active{% endif %}">
+            <img
+              src="{{ vich_uploader_asset(product) }}"
+              alt="slide-{{ product.name }}"
+            />
+
+            <div class="container">
+              <div class="carousel-caption text-start">
+                <h1>{{ product.name }}</h1>
+                <p>Prix: {{ product.price }}&euro;</p>
+                <p><a class="btn btn-lg btn-success" href="{{ path('products_show', {productId: product.id})}}">Voir le produit &raquo;</a></p>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Marketing messaging and featurettes
+  ================================================== -->
+  <!-- Wrap the rest of the page in another container to center all the content. -->
+
+  <div class="container marketing">
+
+    <div class="row">
+    {% for key, product in products %}
+      <div class="col-lg-4">
+        <img 
+          class="bd-placeholder-img rounded-circle"
+          width="140"
+          height="140"
+          src="{{ vich_uploader_asset(product) }}"
+          alt="slide-{{ product.name }}" />
+        
+        <h2>{{product.name}}</h2>
+        <p>{{ product.price }}&euro;</p>
+        <p><a class="btn btn-secondary" href="{{ path('products_show', {productId: product.id})}}">Voir le produit &raquo;</a></p>
+      </div><!-- /.col-lg-4 -->
+      {% endfor %}
+    </div><!-- /.row -->
+
+     <!-- START THE FEATURETTES -->
+    {% for key, product in products %}  
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-7 {{ (key % 2 == 0) ? 'order-md-1' : 'order-md-2' }}">
+          <h2 class="featurette-heading">{{ product.name }}</h2>
+          <p class="price">
+            {{ product.price }}&euro;
+          </p>
+          <p class="description">
+            {{ product.description }}
+          </p>
+          <p>
+            <a href="{{ path('products_show', {productId: product.id})}}" class="btn btn-success">Voir le produit &raquo;</a>
+          </p>
+        </div>
+        <div class="col-md-5 {% if key % 2 == 0 %}order-md-2{% else %}order-md-1{% endif %}">
+          <img 
+            class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
+            width="500"
+            height="500"
+            src="{{ vich_uploader_asset(product) }}"
+            alt="slide-{{ product.name }}"
+          />
+        </div>
+      </div>
+    {% endfor %}
+{% endblock %}

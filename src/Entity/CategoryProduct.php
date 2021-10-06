@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\CategoryProductRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -28,6 +29,22 @@ class CategoryProduct
      * @ORM\OneToMany(targetEntity=Product::class, mappedBy="CategoryProduct")
      */
     private $products;
+
+    /**
+     * @var \DateTime $created
+     *
+     * @Gedmo\Timestampable(on="create")
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @var \DateTime $updated
+     *
+     * @Gedmo\Timestampable(on="update")
+     * @ORM\Column(type="datetime")
+     */
+    private $updatedAt;
 
     public function __construct()
     {
@@ -79,5 +96,15 @@ class CategoryProduct
         }
 
         return $this;
+    }
+
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 }

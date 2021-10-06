@@ -6,12 +6,14 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 use App\Entity\Product;
 use App\Form\ProductType;
 
 /**
  * @Route("/products")
+ * @IsGranted("ROLE_USER")
  */
 class ProductController extends AbstractController
 {
@@ -40,31 +42,6 @@ class ProductController extends AbstractController
 
         return $this->render('product/show.html.twig', [
             'product' => $product
-        ]);
-    }
-    
-    /**
-     * @Route("/new", name="products_new")
-     */
-    public function new(Request $request): Response
-    {
-        $product = new Product();
-
-        $form = $this->createForm(ProductType::class, $product);
-
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $product = $form->getData();
-
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($product);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('products_list');
-        }
-
-        return $this->renderForm('product/new.html.twig', [
-            'form' => $form,
         ]);
     }
 }
