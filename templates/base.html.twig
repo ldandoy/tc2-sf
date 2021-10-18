@@ -15,10 +15,11 @@
         {% block javascripts %}
             {#{{ encore_entry_script_tags('app') }}#}
         {% endblock %}
+        <script src="/main.js" type="text/javascript" defer></script>
     </head>
     <body>
         <header>
-            <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <nav class="navbar navbar-expand-md navbar-light fixed-top" style="background-color: #e3f2fd;">
                 <div class="container-fluid">
                     <a class="navbar-brand" href="/">E-Commerce</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,18 +28,64 @@
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <ul class="navbar-nav me-auto mb-2 mb-md-0">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="/">Home</a>
+                                <a class="nav-link {{ app.request.get('_route') == 'app_welcome_index' ? 'active' }}" aria-current="page" href="/">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/products">Produits</a>
+                                <a class="nav-link {{ app.request.get('_route') == 'products_list' ? 'active' }}" href="/products">Produits</a>
                             </li>
+                        </ul>
+
+                        <ul class="navbar-nav dflex">
+                            {% if not is_granted('ROLE_USER') %}
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" href="/login">Login</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/register">Register</a>
+                                </li>
+                            {% endif %}
+
+                            {% if is_granted('ROLE_USER') %}
+                                <li class="nav-item">
+                                    <a class="btn btn-success" href="/cart">
+                                        <i class="fas fa-shopping-cart"></i>
+                                        <span class="badge bg-secondary">{{ app.session.get('cart') | length }}</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Mon compte
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        {% if is_granted('ROLE_ADMIN') %}
+                                            <li class="nav-item">
+                                                <a class="nav-link" target='_blank' href="{{ path('admin_products_list') }}">Admin</a>
+                                            </li>
+                                        {% endif %}
+                                        <li><hr class="dropdown-divider"></li>
+                                        {% if is_granted('ROLE_USER') %}
+                                            <li class="nav-item">
+                                                <a class="nav-link" aria-current="page" href="/logout">Logout</a>
+                                            </li>
+                                        {% endif %}
+                                    </ul>
+                                </li>
+                            {% endif %}
                         </ul>
                     </div>
                 </div>
             </nav>
         </header>
         
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+
         {% block body %}{% endblock %}
+        
         <!-- FOOTER -->
         <footer class="container mt-5">
             <p>&copy; 2017–2021 E-Commerce</p>

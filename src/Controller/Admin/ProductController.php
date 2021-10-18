@@ -13,7 +13,7 @@ use App\Form\ProductType;
 
 /**
  * @Route("/admin/products")
- * @IsGranted("ROLE_USER")
+ * @IsGranted("ROLE_ADMIN")
  */
 class ProductController extends AbstractController
 {

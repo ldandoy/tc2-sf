@@ -5,12 +5,12 @@
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li>
-        <a href="/admin" class="nav-link text-white active">
+        <a href="{{ path('admin_dashboard') }}" class="nav-link text-white {{ app.request.get('_route') == 'admin_dashboard' ? 'active' }}">
           <i class="fas fa-tachometer-alt"></i> Dashboard
         </a>
       </li>
       <li>
-        <a href="/admin/products" class="nav-link text-white">
+        <a href="{{ path('admin_products_list') }}" class="nav-link text-white {{ app.request.get('_route') == 'admin_products_list' ? 'active' }}">
           <i class="fab fa-product-hunt"></i>
           Products
         </a>
@@ -31,7 +31,7 @@
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
-        <a href="/" class="nav-link text-white" aria-current="page">
+        <a href="/" target='_blank' class="nav-link text-white" aria-current="page">
           Voir le site
         </a>
       </li>

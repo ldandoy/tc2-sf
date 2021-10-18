@@ -12,7 +12,7 @@
         </div>
 
         <div class="row row-cols-1 row-cols-md-3 g-4">
-            {% for product in products %}    
+            {% for product in pagination %}    
                 <div class="col">
                     <div class="card">
                         <img 
@@ -30,6 +30,11 @@
                     </div>
                 </div>
             {% endfor %}
+        </div>
+        <div class="row">
+            <div class="navigation pt-3">
+                {{ knp_pagination_render(pagination) }}
+            </div>
         </div>
     </div>
 {% endblock %}

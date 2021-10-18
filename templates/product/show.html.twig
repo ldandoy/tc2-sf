@@ -28,18 +28,19 @@
                     {{ product.description }}
                 </div>
                 <div class="addpanier">
-                    <form class="row align-items-center" action="" method="post">
+                    <form class="row align-items-center" action="{{ path('cart_add') }}" method="post">
+                        <input type="hidden" name="productId" value="{{ product.id }}" />
                         <div class="col-1">
-                            <button type="button" class="btn btn-light">-</button>
+                            <button type="button" id="moins" class="btn btn-light">-</button>
+                        </div>
+                        <div class="col-2">
+                            <input type="text" class="form-control" id="productQty" name="productQty" value="1" />
                         </div>
                         <div class="col-1">
-                            <input type="text" class="form-control" id="" value="1" />
-                        </div>
-                        <div class="col-1">
-                            <button type="button" class="btn btn-light">+</button>
+                            <button type="button" id="plus" class="btn btn-light">+</button>
                         </div>
                         <div class="col-5">
-                            <button type="button" class="btn btn-success">Ajouter au panier</button>
+                            <button type="submit" class="btn btn-success">Ajouter au panier</button>
                         </div>
                     </fom>
                 </div>
