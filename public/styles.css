@@ -100,3 +100,7 @@ body {
     padding: 1%;
     border: 1px solid dimgrey;
   }
+
+  .form-control {
+    text-align: center;
+  }

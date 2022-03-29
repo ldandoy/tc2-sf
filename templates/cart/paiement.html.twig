@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Paiement du panier{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col">
+                <div class="title">
+                    <h1>Paiement du panier</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th width="6%">Id</th>
+                            <th>Nom</th>
+                            <th  width="10%">Prix Unitaire</th>
+                            <th  width="10%">Qte</th>
+                            <th  width="10%">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% set total = 0 %}
+                        {% for key, item in cartItems %}
+                            <tr>
+                                <td>
+                                    <img 
+                                        class="bd-placeholder-img bd-placeholder-img-lg img-fluid mx-auto" 
+                                        width="50"
+                                        height="50"
+                                        src="{{ vich_uploader_asset(item.product) }}"
+                                        alt="slide-{{ item.product.name }}"
+                                    />
+                                </td>
+                                <td>
+                                    <a href="{{ path('products_show', {productId: item.product.id}) }}">{{ item.product.name }}</a>
+                                </td>
+                                <td class="text-center">{{ item.product.price }} €</td>
+                                <td class="text-center">
+                                    {{ item.productQty }}
+                                </td>
+                                <td class="text-end">{{ item.product.price * item.productQty }} €</td>
+                            </tr>
+                            {% set total = total + item.product.price * item.productQty %}
+                        {% endfor %}
+                        {% set totalTVA = total * 20 / 100 %}
+                        {% set totalTTC = total + totalTVA %}
+                        <tr>
+                            <td colspan="5">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>Total HT</td>
+                            <td class="text-end">{{ total }} €</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>Total TVA</td>
+                            <td class="text-end">{{ totalTVA }} €</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>Total TTC</td>
+                            <td class="text-end">{{ totalTTC }} €</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="text-end">
+                <a href="{{ path('paiement') }}" class="btn btn-success">Paiement</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

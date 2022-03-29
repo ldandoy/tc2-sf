@@ -8,8 +8,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Knp\Component\Pager\PaginatorInterface;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 use App\Entity\Product;
+use App\Entity\CategoryProduct;
 use App\Form\ProductType;
 
 /**
@@ -20,9 +23,8 @@ class ProductController extends AbstractController
     /**
      * @Route("/", name="products_list")
      */
-    public function list(Request $request, PaginatorInterface $paginator): Response
+    public function list(EntityManagerInterface $em, Request $request, PaginatorInterface $paginator): Response
     {
-        $em = $this->getDoctrine()->getManager();
         $dql   = "SELECT p FROM App\Entity\Product p";
         $query = $em->createQuery($dql);
 
@@ -32,27 +34,39 @@ class ProductController extends AbstractController
             6 /*limit per page*/
         );
 
+        $categoriesProduct = $em->getRepository(CategoryProduct::class)->findAll();
 
         /*$products = $this->getDoctrine()
             ->getRepository(Product::class)
             ->findAll();
         */
         return $this->render('product/list.html.twig', [
-            'pagination' => $pagination
+            'pagination' => $pagination,
+            'categories' => $categoriesProduct
         ]);
     }
 
     /**
      * @Route("/{productId}/show", name="products_show")
      */
-    public function show($productId): Response
+    public function show($productId, SessionInterface $session): Response
     {
         $product = $this->getDoctrine()
             ->getRepository(Product::class)
             ->find($productId);
+        
+        $cartItems = $session->get('cart', []);
+
+        $qty = 1;
+        foreach($cartItems as $key => $item) {
+            if ($item['product']->getId() == $productId) {
+                $qty = $item['productQty'];
+            }
+        }
 
         return $this->render('product/show.html.twig', [
-            'product' => $product
+            'product' => $product,
+            'qtyProduct' => $qty
         ]);
     }
 }

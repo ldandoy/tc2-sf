@@ -2,7 +2,6 @@
 
 {% block body %}
     <form class="form" action="{{ path('login') }}" method="post">
-
         {% if error %}
             <div class="alert alert-danger" role="alert">
                 {{ error.messageKey|trans(error.messageData, 'security') }}

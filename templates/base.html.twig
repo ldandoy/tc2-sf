@@ -36,6 +36,13 @@
                         </ul>
 
                         <ul class="navbar-nav dflex">
+                            <li class="nav-item">
+                                <a class="btn btn-success" href="/cart">
+                                    <i class="fas fa-shopping-cart"></i>
+                                    <span class="badge bg-secondary">{{ app.session.get('cart') | length }}</span>
+                                </a>
+                            </li>
+
                             {% if not is_granted('ROLE_USER') %}
                                 <li class="nav-item">
                                     <a class="nav-link" aria-current="page" href="/login">Login</a>
@@ -46,12 +53,6 @@
                             {% endif %}
 
                             {% if is_granted('ROLE_USER') %}
-                                <li class="nav-item">
-                                    <a class="btn btn-success" href="/cart">
-                                        <i class="fas fa-shopping-cart"></i>
-                                        <span class="badge bg-secondary">{{ app.session.get('cart') | length }}</span>
-                                    </a>
-                                </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Mon compte
@@ -60,6 +61,11 @@
                                         {% if is_granted('ROLE_ADMIN') %}
                                             <li class="nav-item">
                                                 <a class="nav-link" target='_blank' href="{{ path('admin_products_list') }}">Admin</a>
+                                            </li>
+                                        {% endif %}
+                                        {% if is_granted('ROLE_USER') %}
+                                            <li class="nav-item">
+                                                <a class="nav-link" aria-current="page" href="/orders">Commandes</a>
                                             </li>
                                         {% endif %}
                                         <li><hr class="dropdown-divider"></li>
@@ -77,11 +83,13 @@
             </nav>
         </header>
         
-        {% for message in app.flashes('success') %}
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ message }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
         {% endfor %}
 
         {% block body %}{% endblock %}

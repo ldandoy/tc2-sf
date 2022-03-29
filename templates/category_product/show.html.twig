@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos produits{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col">
+                <div class="title">
+                    <h1>Nos produits</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col">
+                <ul class="nav nav-pills">
+                    {% for category in categories %}
+                        <li class="nav-item">
+                            <a class="nav-link {{ (category.id == categoryId) ? 'active' }}" aria-current="page" href="{{ path('categories_products', {categoryId: category.id}) }}">
+                                {{ category.name }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="row mt-1 row-cols-1 row-cols-md-3 g-4">
+            {% for product in pagination %}    
+                <div class="col">
+                    <div class="card">
+                        <img 
+                            src="{{ vich_uploader_asset(product) }}"
+                            class="card-img-top"
+                            alt="{{ product.name }}"
+                        />
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <p class="card-text">Prix: {{ product.price }}&euro;</p>
+                        </div>
+                        <div class="card-footer text-end">
+                            <a href="{{ path('products_show', {productId: product.id})}}" class="btn btn-success">Voir le produit &raquo;</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="row">
+            <div class="navigation pt-3">
+                {{ knp_pagination_render(pagination) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

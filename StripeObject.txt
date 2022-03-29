@@ -1,0 +1,311 @@
+Stripe\Checkout\Session JSON: {     
+    "id": "cs_test_a14p7255veVR5faU62jdpgH3muLK1utishZKnRDfwJIu3W9Hvbp652EDKL",     
+    "object": "checkout.session",     
+    "after_expiration": null,     
+    "allow_promotion_codes": null,     
+    "amount_subtotal": 2300,     
+    "amount_total": 2760,     
+    "automatic_tax": {         
+        "enabled": true,         
+        "status": "complete"     
+    },     
+    "billing_address_collection": null,     
+    "cancel_url": "http:\/\/127.0.0.1:8000\/paiement\/canceled",     
+    "client_reference_id": null,     
+    "consent": null,     
+    "consent_collection": null,     
+    "currency": "eur",     
+    "customer": "cus_LP771qWBnuhWPJ",     
+    "customer_creation": "always",     
+    "customer_details": {         
+        "email": "test@test.com",         
+        "phone": null,         
+        "tax_exempt": "none",         
+        "tax_ids": []     
+    },     
+    "customer_email": "test@test.com",     
+    "expires_at": 1648561440,     
+    "livemode": false,     
+    "locale": null,     
+    "metadata": [],     
+    "mode": "payment",     
+    "payment_intent": "pi_3KiIrULfGkjxOTjG1YuiWrBn",     
+    "payment_link": null,     
+    "payment_method_options": [],     
+    "payment_method_types": [         "card"     ],     
+    "payment_status": "paid",     
+    "phone_number_collection": {         
+        "enabled": false     
+    },     
+    "recovered_from": null,     
+    "setup_intent": null,     
+    "shipping": null,     
+    "shipping_address_collection": null,     
+    "shipping_options": [],     
+    "shipping_rate": null,     
+    "status": "complete",     
+    "submit_type": null,     
+    "subscription": null,     
+    "success_url": "http:\/\/127.0.0.1:8000\/paiement\/success?session_id={CHECKOUT_SESSION_ID}",     
+    "total_details": {         
+        "amount_discount": 0,         
+        "amount_shipping": 0,         
+        "amount_tax": 460     
+    },     
+    "url": null 
+}
+
+Stripe\PaymentIntent JSON: {     
+    "id": "pi_3KiKaRLfGkjxOTjG24dYFcFo",     
+    "object": "payment_intent",     
+    "amount": 4600,     
+    "amount_capturable": 0,     
+    "amount_received": 0,     
+    "application": null,     
+    "application_fee_amount": null,     
+    "automatic_payment_methods": null,     
+    "canceled_at": null,     
+    "cancellation_reason": null,     
+    "capture_method": "automatic",     
+    "charges": {         
+        "object": "list",         
+        "data": [],         
+        "has_more": false,         
+        "total_count": 0,         
+        "url": "\/v1\/charges?payment_intent=pi_3KiKaRLfGkjxOTjG24dYFcFo"     
+    },     
+    "client_secret": "pi_3KiKaRLfGkjxOTjG24dYFcFo_secret_dDO13y8288vlw7nAbCCm04X6x",     
+    "confirmation_method": "automatic",     
+    "created": 1648481671,     
+    "currency": "eur",     
+    "customer": null,     
+    "description": null,     
+    "invoice": null,     
+    "last_payment_error": null,     
+    "livemode": false,     
+    "metadata": [],     
+    "next_action": null,     
+    "on_behalf_of": null,     
+    "payment_method": null,     
+    "payment_method_options": {         
+        "card": {             
+            "installments": null,             
+            "mandate_options": null,             
+            "network": null,             
+            "request_three_d_secure": "automatic"         
+        }     
+    },     
+    "payment_method_types": [         "card"     ],     
+    "processing": null,     
+    "receipt_email": null,     
+    "review": null,     
+    "setup_future_usage": "off_session",     
+    "shipping": null,     
+    "source": null,     
+    "statement_descriptor": null,     
+    "statement_descriptor_suffix": null,     
+    "status": "requires_payment_method",     
+    "transfer_data": null,     
+    "transfer_group": null 
+}
+
+
+Stripe\PaymentIntent JSON: {     
+    "id": "pi_3KiKkJLfGkjxOTjG2DJLMz9F",     
+    "object": "payment_intent",     
+    "amount": 5520,     
+    "amount_capturable": 0,     
+    "amount_received": 0,     
+    "application": null,     
+    "application_fee_amount": null,     
+    "automatic_payment_methods": null,     
+    "canceled_at": null,     
+    "cancellation_reason": null,     
+    "capture_method": "automatic",     
+    "charges": {         
+        "object": "list",         
+        "data": [             
+            {                 
+                "id": "ch_3KiKkJLfGkjxOTjG27KHnkTj",                 
+                "object": "charge",                 
+                "amount": 5520,                 
+                "amount_captured": 0,                 
+                "amount_refunded": 0,                 
+                "application": null,                 
+                "application_fee": null,                 
+                "application_fee_amount": null,                 
+                "balance_transaction": null,                 
+                "billing_details": {                     
+                    "address": {                         
+                        "city": "test",                         
+                        "country": "FR",                         
+                        "line1": "test",                         
+                        "line2": null,                         
+                        "postal_code": "89000",                         
+                        "state": null                     
+                    },                     
+                    "email": "test@test.com",                     
+                    "name": "test",                     
+                    "phone": null                 
+                },                 
+                "calculated_statement_descriptor": "OVERCONSULTING.NET",                 
+                "captured": false,                 
+                "created": 1648482681,                 
+                "currency": "eur",                 
+                "customer": "cus_LP94gi3N9HTlLd",                 
+                "description": null,                 
+                "destination": null,                 
+                "dispute": null,                 
+                "disputed": false,                 
+                "failure_code": "card_declined",                 
+                "failure_message": "Your card has insufficient funds.",                 
+                "fraud_details": [],                 
+                "invoice": null,                 
+                "livemode": false,                 
+                "metadata": [],                 
+                "on_behalf_of": null,                 
+                "order": null,                 
+                "outcome": {                     
+                    "network_status": "declined_by_network",                     
+                    "reason": "insufficient_funds",                     
+                    "risk_level": "normal",                     
+                    "risk_score": 63,                     
+                    "seller_message": "The bank returned the decline code `insufficient_funds`.",                     
+                    "type": "issuer_declined"                 
+                },                 
+                "paid": false,                 
+                "payment_intent": "pi_3KiKkJLfGkjxOTjG2DJLMz9F",                 
+                "payment_method": "pm_1KiKqiLfGkjxOTjGPrKIxwZ9",                 
+                "payment_method_details": {                     
+                    "card": {                         
+                        "brand": "visa",                         
+                        "checks": {                             
+                            "address_line1_check": "pass",                             
+                            "address_postal_code_check": "pass",                             
+                            "cvc_check": "pass"                         
+                        },                         
+                        "country": "US",                         
+                        "exp_month": 9,                         
+                        "exp_year": 2023,                         
+                        "fingerprint": "6waBhAaKtkswHRm2",                         
+                        "funding": "credit",                         
+                        "installments": null,                         
+                        "last4": "9995",                         
+                        "mandate": null,                         
+                        "network": "visa",                         
+                        "three_d_secure": null,                         
+                        "wallet": null                     
+                    },                     
+                    "type": "card"                 
+                },                 
+                "receipt_email": null,                 
+                "receipt_number": null,                 
+                "receipt_url": null,                 
+                "refunded": false,                 
+                "refunds": {                     
+                    "object": "list",                     
+                    "data": [],                     
+                    "has_more": false,                     
+                    "total_count": 0,                     
+                    "url": "\/v1\/charges\/ch_3KiKkJLfGkjxOTjG27KHnkTj\/refunds"                 
+                },                 
+                "review": null,                 
+                "shipping": null,                 
+                "source": null,                 
+                "source_transfer": null,                 
+                "statement_descriptor": null,                 
+                "statement_descriptor_suffix": null,                 
+                "status": "failed",                 
+                "transfer_data": null,                 
+                "transfer_group": null             
+            }         
+        ],         
+        
+        "has_more": true,         
+        "total_count": 2,         
+        "url": "\/v1\/charges?payment_intent=pi_3KiKkJLfGkjxOTjG2DJLMz9F"     
+    },     
+    "client_secret": "pi_3KiKkJLfGkjxOTjG2DJLMz9F_secret_2CqnmemuVnmy8BPf1EpNpipXF",     
+    "confirmation_method": "automatic",     
+    "created": 1648482283,     
+    "currency": "eur",     
+    "customer": "cus_LP94gi3N9HTlLd",     
+    "description": null,     
+    "invoice": null,     
+    "last_payment_error": {         
+        "charge": "ch_3KiKkJLfGkjxOTjG27KHnkTj",         
+        "code": "card_declined",         
+        "decline_code": "insufficient_funds",         
+        "doc_url": "https:\/\/stripe.com\/docs\/error-codes\/card-declined",         
+        "message": "Your card has insufficient funds.",         
+        "payment_method": {             
+            "id": "pm_1KiKqiLfGkjxOTjGPrKIxwZ9",             
+            "object": "payment_method",             
+            "billing_details": {                 
+                "address": {                     
+                    "city": "test",                     
+                    "country": "FR",                     
+                    "line1": "test",                     
+                    "line2": null,                     
+                    "postal_code": "89000",                     
+                    "state": null                 
+                },                 
+                "email": "test@test.com",                 
+                "name": "test",                 
+                "phone": null             
+            },             
+            "card": {                 
+                "brand": "visa",                 
+                "checks": {                     
+                    "address_line1_check": "pass",                     
+                    "address_postal_code_check": "pass",                     
+                    "cvc_check": "pass"                 
+                },                 
+                "country": "US",                 
+                "exp_month": 9,                 
+                "exp_year": 2023,                 
+                "fingerprint": "6waBhAaKtkswHRm2",                 
+                "funding": "credit",                 
+                "generated_from": null,                 
+                "last4": "9995",                 
+                "networks": {                     
+                    "available": [                         "visa"                     ],                     
+                    "preferred": null                 
+                },                 
+                "three_d_secure_usage": {                     "supported": true                 },                 
+                "wallet": null             
+            },             
+            "created": 1648482680,             
+            "customer": null,             
+            "livemode": false,             
+            "metadata": [],             
+            "type": "card"         
+        },         
+        "type": "card_error"     
+    },     
+    "livemode": false,     
+    "metadata": [],     
+    "next_action": null,     
+    "on_behalf_of": null,     
+    "payment_method": null,     
+    "payment_method_options": {         
+        "card": {             
+            "installments": null,             
+            "mandate_options": null,             
+            "network": null,             
+            "request_three_d_secure": "automatic"         
+        }     
+    },     
+    "payment_method_types": [         "card"     ],     
+    "processing": null,     
+    "receipt_email": null,     
+    "review": null,     
+    "setup_future_usage": "off_session",     
+    "shipping": null,     
+    "source": null,     
+    "statement_descriptor": null,     
+    "statement_descriptor_suffix": null,     
+    "status": "requires_payment_method",     
+    "transfer_data": null,     
+    "transfer_group": null
+}
